@@ -22,7 +22,13 @@
             margin: 0; padding: 20px;
             color: var(--text-dark);
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+
+
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
 
 
         .profile-header {
@@ -69,11 +75,11 @@
         }
         .btn-pdf:hover { opacity: 0.9; }
 
-        .btn-logout {
-            background-color: #fee2e2;
-            color: var(--danger);
+        .btn-edit {
+            background-color: #e0e7ff;
+            color: var(--primary);
         }
-        .btn-logout:hover { background-color: #fecaca; }
+        .btn-edit:hover { background-color: #c7d2fe; }
 
 
         .profile-content {
@@ -120,22 +126,38 @@
         }
 
 
+
         .content-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 3fr 1fr;
             gap: 20px;
+            align-items: stretch;
         }
+
 
 
         .card-section {
-            background: var(--card-bg); padding: 25px; border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            height: 100%;
         }
+
         h3 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px; display: flex; justify-content: space-between; }
 
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
         th { color: #888; font-weight: 500; }
 
 
@@ -146,11 +168,17 @@
         .badge-room { background: #e0e7ff; color: #3730a3; }
 
 
+
         .qr-section {
-            background: var(--card-bg); padding: 30px; border-radius: 16px;
-            text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            height: fit-content;
+            background: var(--card-bg);
+            padding: 25px; /* 40px -> 25px */
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: 100%;
+            box-sizing: border-box;
         }
+
         .qr-box {
             background: #f8fafc; padding: 20px; border-radius: 12px;
             margin-top: 15px; border: 2px dashed #cbd5e1; display: inline-block;
@@ -186,7 +214,8 @@
         <div class="header-top">
             <div class="profile-title">Profile Information</div>
             <div class="header-actions">
-                <button class="btn btn-logout" onclick="window.location.href='login.jsp'">Logout</button>
+                <button class="btn btn-pdf" onclick="window.print()">📄 Export PDF</button>
+                <button class="btn btn-edit" onclick="alert('This feature is under construction by Member 1')">✏️ Edit Profile</button>
             </div>
         </div>
 
@@ -234,7 +263,6 @@
                     <tbody>
                     <%
                         List<String[]> historyList = (List<String[]>) request.getAttribute("bookHistory");
-                        // Note: Ensure this matches your Servlet attribute name (bookHistory or historyList)
                         if (historyList != null && !historyList.isEmpty()) {
                             for (String[] record : historyList) {
                                 String statusClass = "badge-borrowed";
