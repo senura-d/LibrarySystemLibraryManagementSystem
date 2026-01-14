@@ -22,12 +22,12 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
 
-        // Password Hashing (Simple version for testing)
+
         String hashedPassword = hashPassword(pass);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Database connection
+
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/library_db", "root", "1234");
 
@@ -42,7 +42,6 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userEmail", email);
                 session.setAttribute("userName", rs.getString("full_name"));
-                // Redirect to home
                 response.sendRedirect("member_home.jsp");
             } else {
                 request.setAttribute("errorMessage", "Invalid Login");

@@ -249,19 +249,19 @@
         const viewElements = document.querySelectorAll('.view-mode');
         const editElements = document.querySelectorAll('.edit-mode');
 
-        // Check current state
+
         const isEditing = editElements[0].style.display !== 'none';
 
         if (isEditing) {
-            // Switch back to View Mode (Cancel)
+
             viewElements.forEach(el => el.style.display = 'block');
             editElements.forEach(el => el.style.display = 'none');
         } else {
-            // Switch to Edit Mode
+
             viewElements.forEach(el => el.style.display = 'none');
             editElements.forEach(el => el.style.display = 'block');
 
-            // Fix for flex containers (like buttons)
+
             const flexContainers = document.querySelectorAll('.edit-mode[style*="gap"]');
             flexContainers.forEach(el => el.style.display = 'flex');
         }

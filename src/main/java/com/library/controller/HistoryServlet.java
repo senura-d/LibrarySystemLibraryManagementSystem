@@ -19,17 +19,17 @@ public class HistoryServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        // 1. හරියටම LoginServlet එකේ නම ("userEmail") පාවිච්චි කරනවා
+
         String email = (String) session.getAttribute("userEmail");
 
-        // Login වෙලා නැත්නම් Login එකට යවනවා
+
         if (email == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
         String studentId = "";
-        String fullName = (String) session.getAttribute("userName"); // Login එකෙන් නම Save කරපු නිසා කෙලින්ම ගන්නවා
+        String fullName = (String) session.getAttribute("userName");
         if(fullName == null) fullName = "Student";
 
         List<Map<String, String>> bookHistory = new ArrayList<>();
@@ -39,7 +39,7 @@ public class HistoryServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_db", "root", "1234");
 
-            // 2. Email එකෙන් Student ID එක හොයාගන්නවා
+
             String sqlFindId = "SELECT student_id FROM members WHERE email = ?";
             PreparedStatement stmtId = conn.prepareStatement(sqlFindId);
             stmtId.setString(1, email);
@@ -53,11 +53,11 @@ public class HistoryServlet extends HttpServlet {
                 studentId = "Not Found";
             } else {
 
-                // 3. Books History
+
                 String sqlBooks = "SELECT b.title, br.borrow_date, br.return_date, br.status " +
                         "FROM borrow_records br " +
                         "JOIN books b ON br.book_id = b.book_id " +
-                        "WHERE br.student_id = ? ORDER BY br.borrow_date DESC";
+                        "WHERE br.member_id = ? ORDER BY br.borrow_date DESC";
 
                 PreparedStatement stmtBooks = conn.prepareStatement(sqlBooks);
                 stmtBooks.setString(1, studentId);
@@ -72,11 +72,11 @@ public class HistoryServlet extends HttpServlet {
                     bookHistory.add(record);
                 }
 
-                // 4. Room Booking History
+
                 String sqlRooms = "SELECT r.room_name, rb.booking_date, rb.time_slot, rb.status " +
                         "FROM room_booking rb " +
-                        "JOIN rooms r ON rb.room_id = r.room_id " +
-                        "WHERE rb.student_id = ? ORDER BY rb.booking_date DESC";
+                        "JOIN room r ON rb.room_id = r.room_id " +
+                        "WHERE rb.member_id = ? ORDER BY rb.booking_date DESC";
 
                 PreparedStatement stmtRooms = conn.prepareStatement(sqlRooms);
                 stmtRooms.setString(1, studentId);
@@ -96,10 +96,10 @@ public class HistoryServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // දත්ත යවනවා
+
         request.setAttribute("studentId", studentId);
         request.setAttribute("userName", fullName);
-        request.setAttribute("userEmail", email); // Email එකත් යවනවා
+        request.setAttribute("userEmail", email);
         request.setAttribute("historyList", bookHistory);
         request.setAttribute("roomList", roomHistory);
 

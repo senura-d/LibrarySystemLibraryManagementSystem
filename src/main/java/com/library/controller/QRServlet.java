@@ -1,4 +1,6 @@
-package com.library;
+package com.library.controller;
+
+import com.library.QRCodeGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

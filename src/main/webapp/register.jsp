@@ -31,7 +31,7 @@
             margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 8px;
-            box-sizing: border-box; /* Keeps padding inside width */
+            box-sizing: border-box;
             font-size: 14px;
             transition: 0.3s;
         }

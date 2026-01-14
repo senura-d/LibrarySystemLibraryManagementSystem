@@ -12,15 +12,15 @@
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
 
-        /* Submit Button Style */
+
         input[type="submit"] { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 10px; }
         input[type="submit"]:hover { background-color: #218838; }
 
-        /* Camera Button Style */
+
         .cam-btn { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-bottom: 10px; }
         .cam-btn:hover { background-color: #0056b3; }
 
-        /* Success Message Box */
+
         .success-msg {
             background-color: #d4edda;
             color: #155724;
@@ -91,7 +91,7 @@
                 });
             },
             (errorMessage) => {
-                // scanning...
+
             })
             .catch((err) => {
                 alert("Error starting camera: " + err);

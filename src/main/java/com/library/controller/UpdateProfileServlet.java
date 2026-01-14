@@ -25,7 +25,7 @@ public class UpdateProfileServlet extends HttpServlet {
         String studentId = (String) session.getAttribute("memberId");
         String userEmail = (String) session.getAttribute("userEmail");
 
-        // Form එකෙන් දත්ත ගන්නවා
+
         String newName = request.getParameter("name");
         String newEmail = request.getParameter("email");
         String newPass = request.getParameter("password");
@@ -58,11 +58,10 @@ public class UpdateProfileServlet extends HttpServlet {
                 return;
             }
 
-            // 2. Password Logic
             String finalPasswordHash = "";
 
             if (newPass == null || newPass.trim().isEmpty()) {
-                // Password හිස් නම් පරණ එකම ගන්නවා
+
                 PreparedStatement psGetPass = con.prepareStatement("SELECT password_hash FROM members WHERE student_id = ?");
                 psGetPass.setString(1, studentId);
                 ResultSet rsPass = psGetPass.executeQuery();
@@ -71,16 +70,16 @@ public class UpdateProfileServlet extends HttpServlet {
                 }
                 psGetPass.close();
             } else {
-                // අලුත් එකක් ගැහුවොත් Hash කරනවා
+
                 finalPasswordHash = hashPassword(newPass);
             }
 
-            // 3. Update Query (මෙතන තමයි Error එක හැදුවේ: 'name' -> 'full_name')
+
             String sql;
             PreparedStatement ps;
 
             if (inputStream != null) {
-                // Photo එකත් එක්ක
+
                 sql = "UPDATE members SET full_name = ?, email = ?, password_hash = ?, profile_image = ? WHERE student_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, newName);
@@ -89,7 +88,7 @@ public class UpdateProfileServlet extends HttpServlet {
                 ps.setBlob(4, inputStream);
                 ps.setString(5, studentId);
             } else {
-                // Photo නැතුව
+
                 sql = "UPDATE members SET full_name = ?, email = ?, password_hash = ? WHERE student_id = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, newName);
@@ -101,7 +100,7 @@ public class UpdateProfileServlet extends HttpServlet {
             int updated = ps.executeUpdate();
 
             if (updated > 0) {
-                // Session එකත් Update කරනවා
+
                 session.setAttribute("userName", newName);
                 session.setAttribute("userEmail", newEmail);
                 response.sendRedirect("history");

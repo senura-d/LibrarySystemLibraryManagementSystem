@@ -53,7 +53,7 @@
 <div class="container">
     <h2>Member Login</h2>
 
-    <%-- Show error message if login failed --%>
+
     <% if (request.getAttribute("errorMessage") != null) { %>
         <p style="color: red; font-size: 14px;"><%= request.getAttribute("errorMessage") %></p>
     <% } %>

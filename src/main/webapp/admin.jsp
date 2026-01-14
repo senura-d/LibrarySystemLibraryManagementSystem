@@ -9,13 +9,13 @@
         body { font-family: sans-serif; padding: 30px; background-color: #f4f4f4; }
         h2 { color: #333; border-bottom: 2px solid #6c5ce7; padding-bottom: 10px; display: inline-block; }
 
-        /* Table Styles */
+
         table { width: 100%; border-collapse: collapse; background: white; margin-bottom: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
         th { background-color: #6c5ce7; color: white; }
         tr:hover { background-color: #f1f1f1; }
 
-        /* Button Styles */
+
         .btn-logout { background-color: #c0392b; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; float: right; }
         .btn-super { background-color: #d35400; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 10px; }
         .btn-add { background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
@@ -30,7 +30,7 @@
 <h1>Admin Dashboard</h1>
 
 <div class="action-bar">
-    <%-- Only show Orange Button if user is SUPER_ADMIN --%>
+
     <%
         String role = (String) session.getAttribute("adminRole");
         if (role != null && role.equals("SUPER_ADMIN")) {
@@ -75,7 +75,7 @@
         <th>Action</th>
     </tr>
     <%
-        // This is the variable that was duplicated before. Now it's only here once.
+
         List<Book> books = (List<Book>) request.getAttribute("booksList");
         if (books != null) {
             for (Book b : books) {

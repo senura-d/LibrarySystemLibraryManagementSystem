@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*" %>
 <%
-    // 1. කලින් Login වෙලාද කියලා බලනවා
+
     String studentId = (String) session.getAttribute("memberId");
     if (studentId == null) {
         response.sendRedirect("login.jsp");
@@ -12,12 +12,12 @@
     String currentPhone = "";
     String currentPass = "";
 
-    // 2. Database එකෙන් දැනට තියෙන විස්තර ටික ගන්නවා
+
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_db", "root", "1234");
 
-        // student_id එක පාවිච්චි කරලා විස්තර හොයනවා
+
         PreparedStatement ps = con.prepareStatement("SELECT * FROM members WHERE student_id = ?");
         ps.setString(1, studentId);
         ResultSet rs = ps.executeQuery();

@@ -21,10 +21,10 @@ public class ProfileImageServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Database සම්බන්ධතාවය (ඔයාගේ තොරතුරු වලට අනුව වෙනස් කරන්න)
+
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_db", "root", "1234");
 
-            // Database එකේ ඇති රූපය (BLOB) ලබා ගැනීම
+
             PreparedStatement ps = con.prepareStatement("SELECT profile_image FROM members WHERE student_id = ?");
             ps.setString(1, studentId);
             ResultSet rs = ps.executeQuery();
@@ -39,7 +39,7 @@ public class ProfileImageServlet extends HttpServlet {
                     os.flush();
                     os.close();
                 } else {
-                    // රූපයක් නොමැති නම් පෙන්වන Default රූපය
+
                     response.sendRedirect("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
                 }
             }
